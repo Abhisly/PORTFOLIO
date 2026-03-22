@@ -6,7 +6,6 @@
   font-optical-sizing: auto;
   font-style: normal;
   line-height: 1.5;
-  scroll-behavior: smooth;
   color-scheme: light dark;
   color: #eae5ec;
   background-color: var(--backgroundColor);
@@ -18,8 +17,9 @@
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
-  --accentColor: #5eead4;
-  --backgroundColor: #0a0e17;
+  --accentColor: #ffffff;
+  --backgroundColor: #000000;
+  --secondaryColor: #1a1a1a;
   --vh: 100vh;
   --vh: 100svh;
 }
@@ -34,7 +34,7 @@ h6 {
 }
 
 body {
-  overflow: hidden;
+  overflow-y: auto;
 }
 
 a {
@@ -45,6 +45,16 @@ a {
 a:hover {
   color: var(--accentColor);
 }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  background: #000000 !important;
+}
 
 main {
   opacity: 1;
@@ -53,12 +63,11 @@ main {
 
 .main-active {
   opacity: 0;
-  animation: fadeIn 1s 1;
-  animation-fill-mode: forwards;
+  animation: revealIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@keyframes fadeIn {
-  100% {
+@keyframes revealIn {
+  to {
     opacity: 1;
   }
 }
@@ -66,7 +75,7 @@ main {
 body {
   margin: 0;
   height: auto;
-  background-color: #050810;
+  background-color: #000000 !important;
   flex-grow: 1;
   --cWidth: calc(100% - 30px);
   --cMaxWidth: 1920px;
@@ -77,6 +86,7 @@ body {
 .main-body {
   max-width: 100vw;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 .container-main {
@@ -103,26 +113,7 @@ body {
   flex-wrap: nowrap;
 }
 
-.techstack {
-  width: 100%;
-  position: relative;
-  overflow: clip;
-  height: var(--vh);
-  margin: auto;
-  margin-top: 50px;
-  margin-bottom: -100px;
-}
-
-.techstack h2 {
-  font-size: 80px;
-  text-align: center;
-  position: absolute;
-  width: 100%;
-  top: 120px;
-  left: 0;
-  font-weight: 400;
-  text-transform: uppercase;
-}
+/* Legacy TechStack styles removed - now handled in TechStack.css */
 
 @media screen and (min-width: 768px) {
   body {
@@ -131,7 +122,7 @@ body {
 }
 
 @media screen and (max-width: 900px) {
-  .techstack h2 {
-    font-size: 40px;
-  }
+  /* This media query previously targeted .techstack h2,
+     but is now updated to target new classes as per TechStack.css */
+  /* Example: .new-techstack-title { font-size: 40px; } */
 }

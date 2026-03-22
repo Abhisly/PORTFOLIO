@@ -4,6 +4,7 @@
   margin: auto;
   position: relative;
   height: var(--vh);
+  background: transparent;
 }
 
 .landing-container {
@@ -14,18 +15,8 @@
   max-width: var(--cMaxWidth);
 }
 
-.landing-circle1 {
-  top: 0%;
-  left: 0%;
-  z-index: 15;
-  position: fixed;
-  width: 300px;
-  height: 300px;
-  background-color: #22d3ee;
-  box-shadow: inset -50px 40px 50px rgba(0, 180, 180, 0.6);
-  filter: blur(60px);
-  border-radius: 50%;
-  animation: loadingCircle 5s linear infinite;
+.landing-circle1, .landing-circle2 {
+  display: none;
 }
 
 .nav-fade {
@@ -35,7 +26,7 @@
   height: 130px;
   background-image: linear-gradient(0deg,
       transparent,
-      var(--backgroundColor) 70%);
+      #000000 70%);
   pointer-events: none;
   z-index: 12;
   opacity: 0;
@@ -52,26 +43,8 @@
   }
 }
 
-.landing-circle2 {
-  top: 50%;
-  right: 0%;
-  transform: translate(calc(100% - 2px), -50%);
-  z-index: 9;
-  position: fixed;
+.landing-circle1, .landing-circle2 {
   display: none;
-  width: 300px;
-  height: 300px;
-  background-color: #22d3ee;
-  box-shadow: inset -50px 40px 50px rgba(0, 180, 180, 0.6);
-  filter: blur(50px);
-  border-radius: 50%;
-  animation: loadingCircle2 5s linear infinite;
-}
-
-@keyframes loadingCircle2 {
-  100% {
-    transform: translate(calc(100% - 2px), -50%) rotate(360deg);
-  }
 }
 
 .landing-video,
@@ -94,10 +67,10 @@
   width: 400px;
   height: 400px;
   z-index: 1;
-  background-color: #22d3ee;
+  background-color: #38bdf8;
   transform: translate(-50%, 36%) scaleX(1.4);
-  box-shadow: inset 66px 35px 85px 0px rgba(0, 180, 180, 0.65);
-  filter: blur(50px);
+  box-shadow: inset 66px 35px 85px 0px rgba(56, 189, 248, 0.5);
+  filter: blur(40px);
   border-radius: 50%;
   top: 50%;
   left: 50%;
@@ -125,7 +98,7 @@
   height: 250px;
   background-image: linear-gradient(to bottom,
       transparent,
-      var(--backgroundColor) 70%);
+      #000000 100%);
   bottom: -50px;
   left: 50%;
   transform: translateX(-50%);
@@ -137,7 +110,7 @@
   content: "";
   width: 100vw;
   height: 700px;
-  background-color: var(--backgroundColor);
+  background-color: #000000;
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
@@ -175,21 +148,124 @@
   left: 0;
 }
 
-.landing-intro h2 {
-  margin: 0;
-  color: var(--accentColor);
-  font-size: 22px;
-  font-weight: 300;
-  letter-spacing: 2px;
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 5px;
 }
 
-.landing-intro h1 {
-  margin: 0;
-  letter-spacing: 2px;
+.greeting-text {
   font-size: 28px;
-  line-height: 28px;
+  font-weight: 300;
+  letter-spacing: 4px;
+  color: var(--accentColor);
+  text-transform: uppercase;
+  opacity: 0.8;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.greeting-hey {
+  animation-delay: 0.1s;
   font-weight: 500;
+}
+
+.greeting-iam {
+  animation-delay: 0.3s;
+  font-weight: 300;
+}
+
+@keyframes greetingDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.name-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  align-items: flex-start;
+  position: relative;
+}
+
+.name-title::before {
+  content: none;
+}
+
+.name-title::after {
+  content: none;
+}
+
+.name-line {
+  display: flex;
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: 3px;
   font-family: "Geist", sans-serif;
+  line-height: 1;
+  justify-content: flex-start;
+  text-transform: uppercase;
+}
+
+.name-abhi {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 60%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.45));
+  position: relative;
+  animation: textEntrance 0.8s ease-out 0.2s both;
+}
+
+.name-abhi::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textShine 3s linear infinite;
+  pointer-events: none;
+}
+
+.name-venkat {
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.5));
+  position: relative;
+  animation: textEntrance 0.8s ease-out 0.2s both;
+}
+
+.name-venkat::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textShine 3s linear infinite;
+  pointer-events: none;
 }
 
 /* .landing-intro h1 span {
@@ -203,94 +279,172 @@
   bottom: 40px;
   top: inherit;
   z-index: 9;
+  perspective: 1000px;
 }
 
 .landing-info h3 {
-  font-size: 22px;
-  letter-spacing: 2px;
+  font-size: 28px;
+  letter-spacing: 4px;
   font-weight: 300;
   color: var(--accentColor);
-  margin: 0;
-}
-
-.landing-info h2 {
-  margin: 0;
-  margin-top: -20px;
-  margin-left: 20px;
-  font-family: "Geist", sans-serif;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 40px;
-  position: relative;
-  display: flex;
-  flex-wrap: nowrap;
+  margin: 0 0 5px 0;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  opacity: 0.8;
+  animation: fadeInUp 0.8s ease-out;
 }
 
-.landing-h2-info-1 {
-  position: absolute;
-  top: 0;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
 }
 
-h2.landing-info-h2 {
-  color: #14b8a6;
-  font-size: 42px;
-  width: 120%;
-  margin: 0;
+.text-rotator {
+  height: 60px;
+  overflow: hidden;
   font-family: "Geist", sans-serif;
-  font-weight: 600;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 60px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 20px rgba(14, 165, 233, 0.5));
   position: relative;
-  margin-left: -5px;
+  transform-style: preserve-3d;
+  animation: textEntrance 0.8s ease-out 0.2s both;
 }
 
-.landing-h2-2 {
-  position: absolute;
-  top: 0;
+@keyframes textEntrance {
+  from {
+    opacity: 0;
+    transform: rotateX(-20deg) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0) translateY(0);
+  }
 }
 
-.landing-info-h2::after {
+.text-rotator::after {
   content: "";
   position: absolute;
-  width: 100%;
-  height: 120%;
-  z-index: 3;
-  background-image: linear-gradient(0deg,
-      var(--backgroundColor) 40%,
-      rgba(0, 0, 0, 0) 110%);
-  top: 0;
+  bottom: 0;
   left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #0ea5e9, #22d3ee, #38bdf8, transparent);
+  background-size: 200% 100%;
+  animation: linePulse 2s ease-in-out infinite, shimmer 3s linear infinite;
+}
+
+@keyframes linePulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleX(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.rotator-text {
+  display: block;
+  height: 60px;
+  animation: textRotate 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.rotator-text::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: textShine 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes textShine {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes textRotate {
+  0%, 40% {
+    transform: translateY(0);
+  }
+  45%, 90% {
+    transform: translateY(-60px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 @media screen and (min-width: 500px) {
-  .landing-circle2 {
-    display: block;
-  }
-
   .character-model {
     z-index: 0;
   }
 
   .landing-info h3 {
-    font-size: 18px;
+    font-size: 22px;
   }
 
-  .landing-intro h2 {
-    font-size: 18px;
+  .greeting-text {
+    font-size: 22px;
   }
 
-  .landing-intro h1 {
-    font-size: 30px;
-    line-height: 30px;
+  .greeting-wave {
+    font-size: 26px;
   }
 
-  .landing-info h2 {
-    font-size: 35px;
-    line-height: 40px;
+  .name-line, .name-line-2 {
+    font-size: 34px;
   }
 
-  h2.landing-info-h2 {
+  .text-rotator {
     font-size: 38px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .rotator-text {
+    height: 50px;
+    animation: textRotate500 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes textRotate500 {
+    0%, 40% { transform: translateY(0); }
+    45%, 90% { transform: translateY(-50px); }
+    100% { transform: translateY(0); }
   }
 }
 
@@ -309,16 +463,36 @@ h2.landing-info-h2 {
   }
 
   .landing-info h3 {
-    font-size: 25px;
+    font-size: 32px;
   }
 
-  .landing-info h2 {
-    font-size: 45px;
-    line-height: 42px;
+  .greeting-text {
+    font-size: 32px;
   }
 
-  h2.landing-info-h2 {
-    font-size: 55px;
+  .greeting-wave {
+    font-size: 36px;
+  }
+
+  .name-line, .name-line-2 {
+    font-size: 46px;
+  }
+
+  .text-rotator {
+    font-size: 52px;
+    height: 65px;
+    line-height: 65px;
+  }
+
+  .rotator-text {
+    height: 65px;
+    animation: textRotateTablet 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes textRotateTablet {
+    0%, 40% { transform: translateY(0); }
+    45%, 90% { transform: translateY(-65px); }
+    100% { transform: translateY(0); }
   }
 }
 
@@ -383,15 +557,36 @@ h2.landing-info-h2 {
   }
 
   .landing-info h3 {
-    font-size: 35px;
+    font-size: 48px;
   }
 
-  .landing-info h2 {
-    font-size: 65px;
-    line-height: 62px;
+  .greeting-text {
+    font-size: 48px;
   }
 
-  h2.landing-info-h2 {
-    font-size: 75px;
+  .greeting-wave {
+    font-size: 52px;
+  }
+
+  .name-line, .name-line-2 {
+    font-size: 62px;
+  }
+
+  .text-rotator {
+    font-size: 80px;
+    height: 100px;
+    line-height: 100px;
+    filter: drop-shadow(0 0 40px rgba(14, 165, 233, 0.6));
+  }
+
+  .rotator-text {
+    height: 100px;
+    animation: textRotateDesktop 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes textRotateDesktop {
+    0%, 40% { transform: translateY(0); }
+    45%, 90% { transform: translateY(-100px); }
+    100% { transform: translateY(0); }
   }
 }

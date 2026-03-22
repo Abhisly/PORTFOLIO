@@ -1,4 +1,8 @@
 .section-container {
+  --accent-secondary: #064e3b;
+  --bubble-color: rgba(16, 185, 129, 0.1);
+  --glass-bg: rgba(5, 8, 10, 0.7);
+  --glass-border: rgba(16, 185, 129, 0.1);
   width: 1300px;
 }
 .title,

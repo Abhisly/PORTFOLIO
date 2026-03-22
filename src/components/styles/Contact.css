@@ -1,78 +1,282 @@
-.contact-section {
-  margin: auto;
-  padding-bottom: 100px;
-  margin-top: 100px;
+/* ── "Crazy" Grand Finale Overhaul ── */
+.contact-section.crazy-finale {
+  padding: 80px 10% 0px;
+  background-color: transparent;
   position: relative;
-  z-index: 2;
-  background-color: var(--backgroundColor);
-}
-
-.contact-section h3 {
-  font-size: 60px;
-  font-weight: 400;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.contact-flex {
-  display: flex;
-  justify-content: space-between;
-}
-
-.contact-flex h4 {
-  font-weight: 500;
-  margin: 0;
-  opacity: 0.6;
-}
-
-.contact-box {
+  z-index: 10;
+  min-height: auto;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  gap: 30px;
+  overflow: hidden;
 }
 
-.contact-flex p {
-  margin-top: 10px;
-  margin-bottom: 20px;
+.contact-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(14, 165, 233, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 233, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 80%);
+  pointer-events: none;
 }
 
-a.contact-social {
-  font-size: 25px;
-  border-bottom: 1px solid #ccc;
+.contact-background-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.03) 0%, transparent 70%);
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: -1;
 }
 
-.contact-box h2 {
-  font-weight: 400;
-  font-size: 23px;
+.contact-header {
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.finale-title {
+  font-family: "Geist", sans-serif;
+  font-size: clamp(60px, 12vw, 180px);
+  font-weight: 900;
+  letter-spacing: -6px;
+  color: #fff;
+  line-height: 0.85;
   margin: 0;
+  text-transform: uppercase;
+  position: relative;
 }
 
-.contact-box h2>span {
-  color: var(--accentColor);
+.finale-title::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(14, 165, 233, 0.1);
+  transform: translate(10px, 10px);
+  z-index: -1;
 }
 
-.contact-box h5 {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 20px;
+.finale-subtitle {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: #0ea5e9;
+  margin-top: 30px;
   display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.finale-subtitle::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: #0ea5e9;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 120px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 5;
+}
+
+.contact-under-email {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+  margin-top: 115px;
+}
+
+.column-tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: rgba(14, 165, 233, 0.4);
+  margin-bottom: 50px;
+  display: flex;
+  align-items: center;
   gap: 10px;
+}
+
+.contact-large-link {
+  font-family: "Geist", sans-serif;
+  font-size: clamp(32px, 5vw, 72px);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 900;
+  position: relative;
+  display: inline-block;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  letter-spacing: -2px;
+}
+
+.contact-large-link:hover {
+  color: #0ea5e9;
+  transform: translateX(20px);
+}
+
+.link-hover-reveal {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  color: #0ea5e9;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.contact-large-link:hover .link-hover-reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.social-links-crazy {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.social-item-crazy {
+  font-family: "Geist", sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(14, 165, 233, 0.1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.social-item-crazy:hover {
+  padding-left: 30px;
+  color: #0ea5e9;
+  border-bottom-color: #0ea5e9;
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.05), transparent);
+}
+
+.social-text {
+  letter-spacing: -1px;
+}
+
+.social-icon-crazy {
+  font-size: 24px;
+  color: #0ea5e9;
   opacity: 0.5;
+  transition: all 0.4s ease;
 }
 
-@media only screen and (max-width: 1600px) {
-  .contact-section h3 {
-    font-size: 50px;
-  }
-
-  .contact-box h2 {
-    font-size: 20px;
-  }
-
-  a.contact-social {
-    font-size: 22px;
-  }
+.social-item-crazy:hover .social-icon-crazy {
+  opacity: 1;
+  transform: rotate(45deg);
 }
 
+.contact-credits-inline {
+  display: flex;
+  gap: 80px;
+  margin-top: 0;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 10;
+  justify-content: flex-start;
+}
+
+.credit-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.credit-label {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: rgba(14, 165, 233, 0.4);
+}
+
+.credit-value {
+  font-family: "Geist", sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.scroll-to-top {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  color: #0ea5e9;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-5px);
+  text-shadow: 0 0 15px rgba(14, 165, 233, 0.8);
+}
+
+.bottom-scan-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #0ea5e9, transparent);
+  box-shadow: 0 0 15px #0ea5e9;
+  animation: scanBottom 4s ease-in-out infinite;
+}
+
+@keyframes scanBottom {
+  0%, 100% { transform: scaleX(0); opacity: 0; }
+  50% { transform: scaleX(1); opacity: 0.8; }
+}
+
+@media (max-width: 1024px) {
+  .contact-section.crazy-finale {
+    padding: 100px 5%;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+  .contact-under-email {
+    margin-top: 40px;
+  }
+  .contact-credits-inline {
+    gap: 40px;
+  }
+}
 @media only screen and (max-width: 1300px) {
   .contact-section h3 {
     font-size: 40px;

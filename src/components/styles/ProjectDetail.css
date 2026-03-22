@@ -1,0 +1,131 @@
+.project-detail-container {
+  min-height: 100vh;
+  background: #05080a;
+  color: #fff;
+  padding: 100px 10%;
+  position: relative;
+  z-index: 100;
+}
+
+.back-btn {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  margin-bottom: 80px;
+  width: fit-content;
+  transition: color 0.3s;
+}
+
+.back-btn:hover {
+  color: #fff;
+}
+
+.detail-hero {
+  margin-bottom: 150px;
+}
+
+.detail-cat {
+  font-size: 12px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 20px;
+}
+
+.detail-hero-title {
+  font-size: clamp(48px, 12vw, 120px);
+  font-weight: 100;
+  letter-spacing: -5px;
+  line-height: 0.9;
+  margin-bottom: 60px;
+}
+
+.detail-meta-row {
+  display: flex;
+  gap: 100px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 40px;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.meta-item .label {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.meta-item .value {
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.detail-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 150px;
+}
+
+.detail-content h2 {
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: rgba(255, 255, 255, 0.2);
+  margin-bottom: 30px;
+}
+
+.desc-section p {
+  font-size: 20px;
+  line-height: 1.6;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.features-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.features-section li {
+  font-size: 18px;
+  margin-bottom: 15px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.features-section li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  width: 10px;
+  height: 1px;
+  background: #fff;
+}
+
+.detail-footer-scan {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  animation: scanLineMove 4s infinite;
+}
+
+@keyframes scanLineMove {
+  0% { transform: scaleX(0); opacity: 0; }
+  50% { transform: scaleX(1); opacity: 0.2; }
+  100% { transform: scaleX(0); opacity: 0; }
+}
+
+@media (max-width: 1024px) {
+  .detail-content {
+    grid-template-columns: 1fr;
+    gap: 80px;
+  }
+}

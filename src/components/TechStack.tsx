@@ -1,212 +1,274 @@
-import * as THREE from "three";
-import { useRef, useMemo, useState, useEffect } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment } from "@react-three/drei";
-import { EffectComposer, N8AO } from "@react-three/postprocessing";
-import {
-  BallCollider,
-  Physics,
-  RigidBody,
-  CylinderCollider,
-  RapierRigidBody,
-} from "@react-three/rapier";
+import { useLayoutEffect, useRef, useState, type MouseEvent } from "react";
+import "./styles/TechStack.css";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-const textureLoader = new THREE.TextureLoader();
-const imageUrls = [
-  "/images/react2.webp",
-  "/images/next2.webp",
-  "/images/node2.webp",
-  "/images/express.webp",
-  "/images/mongo.webp",
-  "/images/mysql.webp",
-  "/images/typescript.webp",
-  "/images/javascript.webp",
+type Tech = {
+  name: string;
+  icon: string;
+  type: string;
+  desc: string;
+  level: string;
+};
+
+const techData: Tech[] = [
+  { name: "React", icon: "/images/react.webp", type: "ENGINE", desc: "Core frontend architecture for building high-performance interactive interfaces.", level: "ADVANCED" },
+  { name: "TypeScript", icon: "/images/typescript.webp", type: "LOGIC", desc: "Strict type-safety for scalable, enterprise-grade application logic.", level: "ADVANCED" },
+  { name: "JavaScript", icon: "/images/javascript.webp", type: "CORE", desc: "Foundational scripting language powering the entire modern web ecosystem.", level: "EXPERT" },
+  { name: "Angular", icon: "/images/angular.webp", type: "FRAMEWORK", desc: "Comprehensive framework for developing robust single-page applications.", level: "INTERMEDIATE" },
+  { name: "Java", icon: "/images/java.png", type: "BACKEND", desc: "High-level object-oriented language for backend services and enterprise software.", level: "INTERMEDIATE" },
+  { name: "Python", icon: "/images/python.webp", type: "SCRIPT", desc: "Versatile language for backend development, automation, and data processing.", level: "ADVANCED" },
+  { name: "C++", icon: "/images/C++.webp", type: "SYSTEM", desc: "Low-level performance-critical system development and hardware interaction.", level: "BASICS" },
+  { name: "HTML5", icon: "/images/HTML5.png", type: "MARKUP", desc: "Semantic structuring for accessible and standards-compliant web content.", level: "EXPERT" },
+  { name: "CSS3", icon: "/images/CSS3.png", type: "STYLE", desc: "Advanced styling systems including animations, layouts, and responsive design.", level: "EXPERT" },
+  { name: "MongoDB", icon: "/images/mongodb.png", type: "DATA", desc: "NoSQL document-based database management for modern application data.", level: "INTERMEDIATE" },
+  { name: "MySQL", icon: "/images/mysql.png", type: "DATA", desc: "Relational database systems for structured data storage and complex querying.", level: "ADVANCED" },
 ];
-const textures = imageUrls.map((url) => textureLoader.load(url));
-
-const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
-
-const spheres = [...Array(30)].map(() => ({
-  scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
-}));
-
-type SphereProps = {
-  vec?: THREE.Vector3;
-  scale: number;
-  r?: typeof THREE.MathUtils.randFloatSpread;
-  material: THREE.MeshPhysicalMaterial;
-  isActive: boolean;
-};
-
-function SphereGeo({
-  vec = new THREE.Vector3(),
-  scale,
-  r = THREE.MathUtils.randFloatSpread,
-  material,
-  isActive,
-}: SphereProps) {
-  const api = useRef<RapierRigidBody | null>(null);
-
-  useFrame((_state, delta) => {
-    if (!isActive) return;
-    delta = Math.min(0.1, delta);
-    const impulse = vec
-      .copy(api.current!.translation())
-      .normalize()
-      .multiply(
-        new THREE.Vector3(
-          -50 * delta * scale,
-          -150 * delta * scale,
-          -50 * delta * scale
-        )
-      );
-
-    api.current?.applyImpulse(impulse, true);
-  });
-
-  return (
-    <RigidBody
-      linearDamping={0.75}
-      angularDamping={0.15}
-      friction={0.2}
-      position={[r(20), r(20) - 25, r(20) - 10]}
-      ref={api}
-      colliders={false}
-    >
-      <BallCollider args={[scale]} />
-      <CylinderCollider
-        rotation={[Math.PI / 2, 0, 0]}
-        position={[0, 0, 1.2 * scale]}
-        args={[0.15 * scale, 0.275 * scale]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        scale={scale}
-        geometry={sphereGeometry}
-        material={material}
-        rotation={[0.3, 1, 1]}
-      />
-    </RigidBody>
-  );
-}
-
-type PointerProps = {
-  vec?: THREE.Vector3;
-  isActive: boolean;
-};
-
-function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
-  const ref = useRef<RapierRigidBody>(null);
-
-  useFrame(({ pointer, viewport }) => {
-    if (!isActive) return;
-    const targetVec = vec.lerp(
-      new THREE.Vector3(
-        (pointer.x * viewport.width) / 2,
-        (pointer.y * viewport.height) / 2,
-        0
-      ),
-      0.2
-    );
-    ref.current?.setNextKinematicTranslation(targetVec);
-  });
-
-  return (
-    <RigidBody
-      position={[100, 100, 100]}
-      type="kinematicPosition"
-      colliders={false}
-      ref={ref}
-    >
-      <BallCollider args={[2]} />
-    </RigidBody>
-  );
-}
 
 const TechStack = () => {
-  const [isActive, setIsActive] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const marquee1Ref = useRef<HTMLDivElement>(null);
+  const marquee2Ref = useRef<HTMLDivElement>(null);
+  const [activeTech, setActiveTech] = useState<Tech | null>(null);
+  const timeline1Ref = useRef<gsap.core.Timeline | null>(null);
+  const timeline2Ref = useRef<gsap.core.Timeline | null>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
-    };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
+  // Split techData into two rows
+  const row1Data = techData.slice(0, Math.ceil(techData.length / 2));
+  const row2Data = techData.slice(Math.ceil(techData.length / 2));
+
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const setupMarquee = (marquee: HTMLElement | null, direction: number, speed: number) => {
+      if (!marquee) return null;
+      const items = marquee.querySelectorAll(".tech-item");
+      const totalWidth = Array.from(items).reduce((acc, item) => acc + item.clientWidth + 40, 0);
+
+      const tl = gsap.timeline({
+        repeat: -1,
+        defaults: { ease: "none" },
       });
-    });
-    window.addEventListener("scroll", handleScroll);
+
+      // Move half the doubled width (totalWidth/2)
+      tl.to(marquee, {
+        x: direction * (totalWidth / 2),
+        duration: speed,
+        onReverseComplete: () => {
+          tl.totalTime(tl.rawTime() + tl.duration() * 100);
+        }
+      });
+
+      return tl;
+    };
+
+    // Row 1: Left to Right (slower speed: 50s)
+    timeline1Ref.current = setupMarquee(marquee1Ref.current, -1, 50);
+    // Row 2: Right to Left (slower speed: 50s)
+    timeline2Ref.current = setupMarquee(marquee2Ref.current, 1, 50);
+
+    // Initial position for row 2 to start from offset
+    if (marquee2Ref.current) {
+      const items = marquee2Ref.current.querySelectorAll(".tech-item");
+      const totalWidth = Array.from(items).reduce((acc, item) => acc + item.clientWidth + 40, 0);
+      gsap.set(marquee2Ref.current, { x: -totalWidth / 2 });
+    }
+
+    // Entrance animation
+    gsap.fromTo(".ribbon-wrapper", 
+      { opacity: 0, scale: 0.8, rotateX: 20 },
+      { 
+        opacity: 1, 
+        scale: 1, 
+        rotateX: 0,
+        duration: 2, 
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+        }
+      }
+    );
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      timeline1Ref.current?.kill();
+      timeline2Ref.current?.kill();
+      ScrollTrigger.getAll().forEach(t => t.kill());
     };
   }, []);
-  const materials = useMemo(() => {
-    return textures.map(
-      (texture) =>
-        new THREE.MeshPhysicalMaterial({
-          map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
-        })
-    );
-  }, []);
+
+  const handleTechClick = (tech: Tech, e: MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    setActiveTech(tech);
+    
+    // Stop both marquees
+    timeline1Ref.current?.pause();
+    timeline2Ref.current?.pause();
+
+    // Highlighting effect
+    const target = e.currentTarget as HTMLElement;
+    gsap.to(target, { 
+      scale: 1.4, 
+      zIndex: 100, 
+      duration: 0.6, 
+      ease: "power3.out",
+      boxShadow: "0 0 60px rgba(14, 165, 233, 0.6)",
+      borderColor: "#0ea5e9"
+    });
+    
+    gsap.to(".tech-item:not(.active)", { 
+      opacity: 0.15, 
+      filter: "blur(8px)", 
+      scale: 0.85,
+      duration: 0.6 
+    });
+  };
+
+  const handleClose = () => {
+    setActiveTech(null);
+    
+    // Resume both marquees
+    timeline1Ref.current?.play();
+    timeline2Ref.current?.play();
+
+    // Reset items
+    gsap.to(".tech-item", { 
+      opacity: 1, 
+      filter: "blur(0px)", 
+      scale: 1,
+      zIndex: 1,
+      duration: 0.6,
+      boxShadow: "none",
+      borderColor: "rgba(14, 165, 233, 0.2)"
+    });
+  };
 
   return (
-    <div className="techstack">
-      <h2> My Techstack</h2>
+    <div className="tech-stack-section ribbon-mode dual-mode" ref={sectionRef} id="tech" onClick={handleClose}>
+      <div className="ribbon-bg">
+        <div className="scanline-y"></div>
+        <div className="grid-overlay-horizontal"></div>
+        <div className="perspective-shadow"></div>
+      </div>
 
-      <Canvas
-        shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
-        className="tech-canvas"
-      >
-        <ambientLight intensity={1} />
-        <spotLight
-          position={[20, 20, 25]}
-          penumbra={1}
-          angle={0.2}
-          color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
-        />
-        <directionalLight position={[0, 5, -4]} intensity={2} />
-        <Physics gravity={[0, 0, 0]}>
-          <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
-            <SphereGeo
-              key={i}
-              {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
-              isActive={isActive}
-            />
-          ))}
-        </Physics>
-        <Environment
-          files="/models/char_enviorment.hdr"
-          environmentIntensity={0.5}
-          environmentRotation={[0, 4, 2]}
-        />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
-        </EffectComposer>
-      </Canvas>
+      <div className="ribbon-header center">
+        <div className="hud-label">NEURAL_STREAM_v5.0</div>
+        <h2 className="ribbon-title">MY TECH <span>STACK</span></h2>
+      </div>
+
+      <div className="ribbon-wrapper">
+        {/* Ribbon Row 1: Left to Right */}
+        <div className="ribbon-container row-1">
+          <div className="ribbon-track" ref={marquee1Ref}>
+            {[...row1Data, ...row1Data].map((tech, i) => (
+              <div 
+                key={i} 
+                className={`tech-item ${activeTech?.name === tech.name ? 'active' : ''}`}
+                onClick={(e) => handleTechClick(tech, e)}
+                data-cursor="magnetic"
+              >
+                <div className="item-glass">
+                  <div className="item-glow"></div>
+                  <div className="item-icon-wrap">
+                    <img src={tech.icon} alt={tech.name} className="item-icon" />
+                  </div>
+                  <div className="item-info">
+                    <span className="item-type">{tech.type}</span>
+                    <span className="item-name">{tech.name}</span>
+                  </div>
+                  <div className="item-border"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="ribbon-edge left"></div>
+          <div className="ribbon-edge right"></div>
+        </div>
+
+        {/* Ribbon Row 2: Right to Left */}
+        <div className="ribbon-container row-2">
+          <div className="ribbon-track" ref={marquee2Ref}>
+            {[...row2Data, ...row2Data].map((tech, i) => (
+              <div 
+                key={i} 
+                className={`tech-item ${activeTech?.name === tech.name ? 'active' : ''}`}
+                onClick={(e) => handleTechClick(tech, e)}
+                data-cursor="magnetic"
+              >
+                <div className="item-glass">
+                  <div className="item-glow"></div>
+                  <div className="item-icon-wrap">
+                    <img src={tech.icon} alt={tech.name} className="item-icon" />
+                  </div>
+                  <div className="item-info">
+                    <span className="item-type">{tech.type}</span>
+                    <span className="item-name">{tech.name}</span>
+                  </div>
+                  <div className="item-border"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="ribbon-edge left"></div>
+          <div className="ribbon-edge right"></div>
+        </div>
+      </div>
+
+      {activeTech && (
+        <div className="quantum-hud-wrap" onClick={handleClose}>
+          <div className="quantum-hud" onClick={(e) => e.stopPropagation()}>
+            <div className="hud-glitch-bg"></div>
+            <div className="hud-top">
+              <div className="hud-id">DATA_ID: {activeTech.name.toUpperCase()}</div>
+              <button className="hud-close" onClick={handleClose}>×</button>
+            </div>
+
+            <div className="hud-body">
+              <div className="hud-visual">
+                <div className="hud-icon-wrap">
+                  <img src={activeTech.icon} alt="" className="hud-icon" />
+                  <div className="hud-scanner"></div>
+                </div>
+                <div className="hud-metrics">
+                  <div className="metric">
+                    <span>SYNC_QUALITY</span>
+                    <div className="m-bar"><div style={{ width: '98%' }}></div></div>
+                  </div>
+                  <div className="metric">
+                    <span>DATA_DENSITY</span>
+                    <div className="m-bar"><div style={{ width: '85%' }}></div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="hud-info">
+                <h3>{activeTech.name}</h3>
+                <div className="hud-meta">
+                  <div className="meta-tag">
+                    <span className="tag-lab">RANK:</span>
+                    <span className="tag-val">{activeTech.level}</span>
+                  </div>
+                  <div className="meta-tag">
+                    <span className="tag-lab">MODULE:</span>
+                    <span className="tag-val">{activeTech.type}</span>
+                  </div>
+                </div>
+                <p className="hud-desc">{activeTech.desc}</p>
+                
+                <div className="hud-footer-actions">
+                  <div className="action-btn">ESTABLISH_CONNECTION</div>
+                  <div className="action-btn outline">ENCRYPTED_ACCESS</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="hud-bottom">
+              <div className="bottom-line"></div>
+              <span>DUAL_STREAM_PAUSED // ANALYSIS_ACTIVE</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
