@@ -3,8 +3,10 @@ import {
   PropsWithChildren,
   useContext,
   useEffect,
+  useRef,
   useState,
 } from "react";
+import { useLocation } from "react-router-dom";
 import Loading from "../components/Loading";
 
 interface LoadingType {
@@ -18,13 +20,24 @@ export const LoadingContext = createContext<LoadingType | null>(null);
 export const LoadingProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState(0);
+  const location = useLocation();
+  const didInitRef = useRef(false);
 
   const value = {
     isLoading,
     setIsLoading,
     setLoading,
   };
-  useEffect(() => {}, [loading]);
+
+  useEffect(() => {
+    if (didInitRef.current) return;
+    didInitRef.current = true;
+
+    if (location.pathname !== "/") {
+      setLoading(100);
+      setIsLoading(false);
+    }
+  }, [location.pathname]);
 
   return (
     <LoadingContext.Provider value={value as LoadingType}>

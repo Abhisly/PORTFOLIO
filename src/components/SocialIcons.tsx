@@ -89,12 +89,12 @@ const SocialIcons = () => {
           </a>
         </span>
         <span>
-          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="https://leetcode.com/u/9ZmqAzoUJT/" target="_blank" rel="noopener noreferrer">
             <FaXTwitter />
           </a>
         </span>
         <span>
-          <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="mailto:Abhixsly.pro@gmail.com" target="_blank" rel="noopener noreferrer">
             <FaInstagram />
           </a>
         </span>

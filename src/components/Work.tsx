@@ -6,25 +6,40 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const projects = [
   {
-    title: "AI HEALTH CHATBOT",
-    category: "PUBLIC HEALTH",
-    tools: "REACT.JS, FLASK",
-    description: "NEURAL_NODE_01: ADVANCED NLP DIAGNOSTICS SYSTEM",
-    accent: "#0ea5e9"
+    title: "AI-DRIVEN HEALTH CHATBOT",
+    category: "PUBLIC HEALTH AWARENESS",
+    tools: "REACT.JS, FLASK, PYTHON, REST API",
+    description: "SIH_NODE_01: SYMPTOM GUIDANCE + DISEASE AWARENESS INTERFACE",
+    accent: "#0ea5e9",
+    githubUrl: "https://github.com/Abhisly/AI-HEALTH-CHATBOT",
+    liveUrl: null as string | null,
   },
   {
-    title: "AI CHESS ENGINE",
-    category: "GAME THEORY",
-    tools: "JS, PYTHON, OOP",
-    description: "NEURAL_NODE_02: ADAPTIVE PLAYSTYLE PREDICTION ENGINE",
-    accent: "#38bdf8"
+    title: "ZEROWASTE",
+    category: "FOOD WASTE REDISTRIBUTION",
+    tools: "REACT.JS / NEXT.JS, NODE.JS, MONGODB / MYSQL",
+    description: "SYSTEM_NODE_02: MULTI-PORTAL DONATION + DELIVERY WORKFLOWS",
+    accent: "#38bdf8",
+    githubUrl: "https://github.com/Abhisly/ZeroWaste",
+    liveUrl: "https://zero-waste-puce.vercel.app/",
   },
   {
-    title: "VIRTUAL ARCHIVE",
+    title: "AURA",
+    category: "AI SKILL INTELLIGENCE PLATFORM",
+    tools: "REACT.JS, NODE.JS, SUPABASE, POSTGRESQL",
+    description: "AI_NODE_03: MCQ ASSESSMENTS + PERSONALIZED LEARNING ROADMAPS",
+    accent: "#818cf8",
+    githubUrl: "https://github.com/Abhisly/AURA",
+    liveUrl: "https://aura-five-omega.vercel.app/",
+  },
+  {
+    title: "PERSONAL PORTFOLIO WEBSITE",
     category: "WEB DEVELOPMENT",
-    tools: "NEXT.JS, THREE.JS",
-    description: "NEURAL_NODE_03: IMMERSIVE 3D DATA VISUALIZATION",
-    accent: "#0ea5e9"
+    tools: "NEXT.JS, TYPESCRIPT, TAILWIND CSS, SWR",
+    description: "DEPLOY_NODE_04: ANIMATIONS + THEMING + SEO OPTIMIZED BUILD",
+    accent: "#0ea5e9",
+    githubUrl: "https://github.com/Abhisly/PORTFOLIO",
+    liveUrl: "https://portfolio-nu-sage-28.vercel.app/",
   },
 ];
 
@@ -179,24 +194,56 @@ const Work = () => {
                 </div>
 
                 <div className="immersive-action-area">
-                  <Link 
-                    to={`/project/${index}`} 
-                    className="immersive-visit-portal"
-                    data-cursor="magnetic"
-                  >
-                    <div className="portal-rings">
-                      <div className="ring ring-1"></div>
-                      <div className="ring ring-2"></div>
-                      <div className="ring ring-3"></div>
+                  <div className="immersive-actions-stack">
+                    <Link 
+                      to={`/project/${index}`} 
+                      className="immersive-visit-portal"
+                      data-cursor="magnetic"
+                    >
+                      <div className="portal-rings">
+                        <div className="ring ring-1"></div>
+                        <div className="ring ring-2"></div>
+                        <div className="ring ring-3"></div>
+                      </div>
+                      <div className="portal-content">
+                        <span className="portal-text">DETAILS</span>
+                        <svg viewBox="0 0 24 24" className="portal-arrow">
+                          <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" fill="none" strokeWidth="2"/>
+                        </svg>
+                      </div>
+                      <div className="portal-glow" style={{ background: project.accent }}></div>
+                    </Link>
+
+                    <div className="immersive-action-links">
+                      {project.githubUrl ? (
+                        <a
+                          className="immersive-action-btn"
+                          href={project.githubUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          data-cursor="magnetic"
+                        >
+                          GITHUB
+                        </a>
+                      ) : (
+                        <div className="immersive-action-btn disabled">GITHUB_SOON</div>
+                      )}
+
+                      {project.liveUrl ? (
+                        <a
+                          className="immersive-action-btn"
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          data-cursor="magnetic"
+                        >
+                          VIEW_LIVE
+                        </a>
+                      ) : (
+                        <div className="immersive-action-btn disabled">LIVE_SOON</div>
+                      )}
                     </div>
-                    <div className="portal-content">
-                      <span className="portal-text">VISIT</span>
-                      <svg viewBox="0 0 24 24" className="portal-arrow">
-                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" fill="none" strokeWidth="2"/>
-                      </svg>
-                    </div>
-                    <div className="portal-glow" style={{ background: project.accent }}></div>
-                  </Link>
+                  </div>
                 </div>
               </div>
             </div>

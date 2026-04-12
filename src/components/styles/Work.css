@@ -326,6 +326,43 @@
   margin-top: 20px;
 }
 
+.immersive-actions-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.immersive-action-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.immersive-action-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 10px 14px;
+  border: 1px solid rgba(14, 165, 233, 0.25);
+  background: rgba(14, 165, 233, 0.06);
+  transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.immersive-action-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(14, 165, 233, 0.12);
+  border-color: rgba(14, 165, 233, 0.5);
+}
+
+.immersive-action-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .immersive-visit-portal {
   position: relative;
   width: 140px;

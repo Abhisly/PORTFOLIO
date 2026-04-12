@@ -52,21 +52,27 @@ const Career = () => {
   const careerData = [
     {
       role: "Full Stack Developer",
-      company: "AI Chess Bot",
-      year: "2025",
-      description: "Developed a fully playable Chess engine with legal move enforcement and an AI opponent. Built graphical UI with event-driven state management patterns."
+      company: "AI Health Chatbot (SIH)",
+      year: "AUG 2025",
+      description: "Built a full-stack AI health chatbot using React.js and Flask/Python REST API, featuring async data fetching, mobile-first layouts, and reusable state-driven components for symptom guidance and disease awareness. Led Git workflow for a 5-member team."
     },
     {
       role: "Full Stack Developer",
-      company: "AI Health Chatbot",
+      company: "AURA — AI Skill Intelligence",
       year: "2025",
-      description: "Built a full-stack AI health chatbot using React.js and Flask. Implemented responsive layouts and managed codebase within a team of 5."
+      description: "Engineered an AI-powered skill evaluation system with domain-specific MCQ assessments, personalized learning roadmaps, and an AI mentor module delivering context-aware responses based on user performance data."
+    },
+    {
+      role: "Full Stack Developer",
+      company: "ZeroWaste — Food Redistribution",
+      year: "2026",
+      description: "Building a full-stack platform connecting restaurants, NGOs, and delivery agents with multi-portal role-based access, real-time donation workflows, live status tracking, map-based route tracking, and analytics dashboards."
     },
     {
       role: "Frontend Developer",
       company: "Personal Portfolio",
       year: "NOW",
-      description: "Designed and deployed a responsive personal portfolio using Next.js, TypeScript, and Tailwind CSS. Integrated REST API calls for dynamic content."
+      description: "Designed and deployed a responsive portfolio using Next.js (App Router), TypeScript, and Tailwind CSS with REST API integration, SWR data fetching, smooth animations, dark/light theme toggle, and SEO optimization."
     }
   ];
 

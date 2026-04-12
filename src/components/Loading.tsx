@@ -105,11 +105,13 @@ const Loading = ({ percent }: { percent: number }) => {
     };
   }, []);
 
-  if (percent >= 100) {
-    setTimeout(() => {
+  useEffect(() => {
+    if (percent < 100) return;
+    const timeoutId = window.setTimeout(() => {
       setIsLoaded(true);
     }, 1000);
-  }
+    return () => window.clearTimeout(timeoutId);
+  }, [percent]);
 
   useEffect(() => {
     import("./utils/initialFX").then((module) => {

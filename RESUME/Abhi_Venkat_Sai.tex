@@ -1,0 +1,174 @@
+%==================================================
+% Abhi Venkat Sai — Resume
+% Compile with: pdflatex Abhi_Venkat_Sai_Resume.tex
+%==================================================
+\documentclass[a4paper,10pt]{article}
+
+%--- Packages ---
+\usepackage[a4paper, top=0.40in, bottom=0.40in, left=0.5in, right=0.5in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+%--- Colours ---
+\definecolor{navyblue}{RGB}{30, 58, 95}
+\definecolor{linkblue}{RGB}{17, 85, 204}
+\definecolor{graytext}{RGB}{85, 85, 85}
+
+%--- Hyperlinks ---
+\hypersetup{colorlinks=true, urlcolor=linkblue, linkcolor=linkblue}
+
+%--- No page numbers ---
+\pagestyle{empty}
+
+%--- Section style: bold navy + blue rule ---
+\titleformat{\section}
+  {\bfseries\normalsize\color{navyblue}}
+  {}{0em}{}
+  [\color{linkblue}\titlerule]
+\titlespacing{\section}{0pt}{11pt}{3pt}
+
+%--- Bullet list style ---
+\setlist[itemize]{
+  leftmargin=1.15em,
+  itemsep=6.5pt,
+  parsep=0pt,
+  topsep=5pt,
+  partopsep=0pt,
+  label=\textbullet
+}
+
+%--- Remove paragraph indent and spacing ---
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}
+
+%--- Shorthand bullet item ---
+\newcommand{\rItem}[1]{\item\small#1}
+
+%==================================================
+\begin{document}
+%==================================================
+
+%--- NAME & CONTACT ---
+\begin{center}
+  {\LARGE\bfseries\color{navyblue} ABHI VENKAT SAI}\\[4pt]
+  \small
+  \href{mailto:Abhixsly.pro@gmail.com}{Abhixsly.pro@gmail.com}
+  \textcolor{graytext}{$|$ +91 9912355755 $|$}
+  \href{https://linkedin.com/in/abhi-venkat-sai}{LinkedIn}
+  \textcolor{graytext}{$|$}
+  \href{https://github.com/Abhisly}{GitHub}
+  \textcolor{graytext}{$|$}
+  \href{https://leetcode.com/u/9ZmqAzoUJT/}{LeetCode}
+  \textcolor{graytext}{$|$}
+  \href{https://portfolio-nu-sage-28.vercel.app/}{Portfolio}
+\end{center}
+
+\vspace{1pt}
+
+%--- SUMMARY ---
+\section{SUMMARY}
+\vspace{2pt}
+\small
+Software Engineer with strong foundations in Data Structures \& Algorithms and frontend development.
+Skilled in building scalable, responsive UIs using React.js, Next.js, TypeScript, and Tailwind CSS, with
+hands-on experience in full-stack development across Python, Node.js, and REST APIs. Demonstrates a
+consistent track record of delivering production-ready projects, contributing to open-source, and solving
+complex problems through clean, efficient code.
+
+%--- PROJECTS ---
+\section{PROJECTS}
+
+% Project 1 — AI Health Chatbot
+\vspace{2pt}
+{\bfseries\small AI-DRIVEN CHATBOT FOR PUBLIC HEALTH AWARENESS}\\[1pt]
+{\footnotesize\color{graytext}Smart India Hackathon (SIH)\normalcolor~$|$~\href{https://github.com/Abhisly/AI-HEALTH-CHATBOT}{GitHub}\color{graytext}~$|$~August 2025}
+\begin{itemize}
+  \rItem{Built a full-stack AI health chatbot using React.js and Flask/Python REST API, featuring async data fetching, mobile-first CSS3 layouts, and reusable state-driven components for symptom guidance and disease awareness.}
+  \rItem{Led Git workflow for a 5-member team --- feature branches, pull requests, and merge conflict resolution throughout the development lifecycle.}
+\end{itemize}
+
+% Project 2 — ZeroWaste
+\vspace{2pt}
+{\bfseries\small ZEROWASTE -- SMART FOOD WASTAGE PROTECTION \& REDISTRIBUTION SYSTEM}\\[1pt]
+{\footnotesize\href{https://github.com/Abhisly/ZeroWaste}{GitHub}~$|$~\href{https://zero-waste-puce.vercel.app/}{Live Demo}~\textcolor{graytext}{$|$ 2026 (Building)}}
+\begin{itemize}
+  \rItem{Building a full-stack platform connecting restaurants, NGOs, and delivery agents with multi-portal role-based access (Restaurant, NGO, Admin, Agents), real-time donation workflows, and live status tracking.}
+  \rItem{Implemented a dual-role Agent module (Verification + Delivery), map-based route tracking, analytics dashboards, and a glassmorphism UI using React.js / Next.js, Tailwind CSS, Node.js, and MongoDB / MySQL.}
+\end{itemize}
+
+% Project 3 — AURA
+\vspace{2pt}
+{\bfseries\small AURA -- ADAPTIVE AI SKILL INTELLIGENCE PLATFORM}\\[1pt]
+{\footnotesize\href{https://github.com/Abhisly/AURA}{GitHub}~$|$~\href{https://aura-five-omega.vercel.app/}{Live Demo}~\textcolor{graytext}{$|$ 2025}}
+\begin{itemize}
+  \rItem{Engineered a full-stack AI-powered skill evaluation system with domain-specific MCQ assessments, personalized learning roadmaps, and intelligent user-state management differentiating onboarding vs.\ returning users.}
+  \rItem{Built an AI mentor module delivering context-aware responses based on user performance data, paired with an immersive UI featuring dynamic layouts, interactive animations, and 3D visual elements.}
+\end{itemize}
+
+% Project 4 — Portfolio
+\vspace{2pt}
+{\bfseries\small PERSONAL PORTFOLIO WEBSITE}\\[1pt]
+{\footnotesize\href{https://github.com/Abhisly/PORTFOLIO}{GitHub}~$|$~\href{https://portfolio-nu-sage-28.vercel.app/}{Live Demo}~\textcolor{graytext}{$|$ 2026}}
+\begin{itemize}
+  \rItem{Designed and deployed a responsive portfolio using Next.js (App Router), TypeScript, and Tailwind CSS with REST API integration, SWR data fetching, smooth animations, dark/light theme toggle, and SEO optimization.}
+  \rItem{Deployed on Vercel with CI/CD via GitHub; managed with semantic commits and feature-branch Git workflow.}
+\end{itemize}
+
+%--- SKILLS ---
+\section{SKILLS}
+\vspace{2pt}
+\small
+\textbf{Frontend:} HTML5, CSS3, JavaScript (ES6+), React.js (Hooks, Component Lifecycle, State Management), Next.js (App Router, Client/Server Components), TypeScript, Tailwind CSS\\[3pt]
+\textbf{State \& Data:} React Context, Zustand/Jotai (basic); REST API integration, SWR (data fetching \& caching)\\[3pt]
+\textbf{Backend / Programming:} C, C++, Java, Python, Node.js $|$ Spring Boot, Hibernate, JDBC, Flask\\[3pt]
+\textbf{Databases:} MySQL, MongoDB (basic)\\[3pt]
+\textbf{DevOps \& Tools:} Git, GitHub, Docker, Kubernetes (basic), Jenkins (basic), Maven, VS Code, IntelliJ IDEA\\[3pt]
+\textbf{Other Skills:} Data Structures \& Algorithms (C++, Java, Python), OOP, SDLC (Agile, Waterfall), Prompt Engineering
+
+%--- EDUCATION ---
+\section{EDUCATION}
+\vspace{2pt}
+{\bfseries\small B.Tech in Artificial Intelligence \& Machine Learning}~{\small\color{graytext}--- Parul University, Gujarat}
+
+%--- CERTIFICATIONS ---
+\section{CERTIFICATIONS}
+\vspace{2pt}
+\small
+$\bullet$~Full Stack Development (Meta) ---
+  \href{https://coursera.org/verify/P9S8LC23XBWL}{View Certificate}
+  \textcolor{graytext}{$|$ Coursera, May 2025}\\[3pt]
+$\bullet$~Python from Zero-to-Hero ---
+  \href{https://drive.google.com/file/d/1sHXVgnp1mGbrP9o17WQXciCU43bGCxo8/view?usp=drive_link}{View Certificate}
+  \textcolor{graytext}{$|$ Udemy, May 2025}\\[3pt]
+$\bullet$~Generative AI for Beginners ---
+  \href{https://drive.google.com/file/d/1IGowPQm8p0gBpowk9EqmXRQtfeN5-dtY/view?usp=drive_link}{View Certificate}
+  \textcolor{graytext}{$|$ SkillUp by Simplilearn, May 2025 $|$ Code: 8297436}\\[3pt]
+$\bullet$~Introduction to Prompt Engineering ---
+  \href{https://drive.google.com/file/d/1KX7hNBRy2jBhX0FYq71vQosTgnYjMJ8K/view?usp=drive_link}{View Certificate}
+  \textcolor{graytext}{$|$ SkillUp by Simplilearn, May 2025 $|$ Code: 8297603}\\[3pt]
+$\bullet$~Algorithm Thinking: Mastering DSA ---
+  \href{https://drive.google.com/file/d/1UL8Btv7IMVAnsLe35U3SeAkRNJhV4tQD/view?usp=drive_link}{View Certificate}
+  \textcolor{graytext}{$|$ Dept.\ of CSE-AIML, Parul University $|$ June 2025}\\[3pt]
+$\bullet$~Generative AI --- 
+  \href{https://drive.google.com/file/d/1taS4O9LJXNZyQS2YorCtTu_HTCBBn3wT/view?usp=drive_link}{View Certificate}
+  \textcolor{graytext}{$|$ Oracle, 2025}
+
+
+%--- HACKATHONS ---
+\section{HACKATHONS \& COMPETITIONS}
+\vspace{2pt}
+\small
+$\bullet$~Vadodara Hackathon 6.0 ---
+  \href{https://drive.google.com/file/d/1GddzsLH7jMgIva0xKu67fhe7pHxxerUL/view?usp=drive_link}{Certificate of Participation}
+  \textcolor{graytext}{$|$ Parul Innovation \& Entrepreneurship Research Centre, Vadodara $|$ Sep 2025}\\[3pt]
+$\bullet$~Smart India Hackathon (SIH) 2025 ---
+  \href{https://github.com/Abhisly/AI-HEALTH-CHATBOT}{AI-Driven Public Health Chatbot}
+  \textcolor{graytext}{$|$ August 2025}
+
+%==================================================
+\end{document}
+%==================================================
